@@ -5,11 +5,14 @@ plugins {
 android {
     namespace 'com.diezavala.project02'
     compileSdk 33
+//    gymlog sdk is 32//33
 
     defaultConfig {
         applicationId "com.diezavala.project02"
         minSdk 26
+        //    gymlog minsdk is 28//26
         targetSdk 33
+        //    gymlog targetsdk is 32//33
         versionCode 1
         versionName "1.0"
 
@@ -36,20 +39,27 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.diezavala.project02'
 }
 
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    //    gymlog has 1.4.1 /1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
+    //    gymlog has 1.5.0/1.8.0
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //    gymlog has 2.1.3/2.1.4'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    //    gymlog has 1.1.3/1.1.5
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //    gymlog has 3.4.0/3.5.1'
 
     //adding the room db
     def room_version = "2.4.3"
-
+    //    gymlog has 2.4.2//"2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 }

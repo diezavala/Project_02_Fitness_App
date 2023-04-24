@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Project 02</string>
+    <string name="enter_exercise">Enter Exercise</string>
+    <string name="enter_weight">Enter Weight</string>
+    <string name="enter_reps">Enter Reps</string>
+    <string name="submit">Submit</string>
+    <string name="no_logs_message">No logs yet, time to hit the gym.</string>
 </resources>

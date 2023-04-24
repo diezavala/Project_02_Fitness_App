@@ -60,7 +60,7 @@
         android:layout_height="88dp"
         android:layout_marginTop="52dp"
         android:gravity="center"
-        android:text="Log In"
+        android:text="GYMLOG"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
