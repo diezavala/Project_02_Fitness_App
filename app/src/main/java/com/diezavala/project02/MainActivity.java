@@ -20,7 +20,7 @@ import com.diezavala.project02.databinding.ActivityMainBinding;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+//adding this to test github
     UserDAO userDAO;
     ActivityMainBinding binding;
     Button logIn;
