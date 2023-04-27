@@ -12,10 +12,12 @@ public class users {
 
     private String username;
     private String password;
+    private int isAdmin;
 
-    public users(String username, String password) {
+    public users(String username, String password, int isAdmin) {
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
 //        this.logId = logId;
     }
 
@@ -41,5 +43,13 @@ public class users {
 
     public void setLogId(int logId) {
         this.logId = logId;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

@@ -20,9 +20,34 @@
         app:layout_constraintVertical_bias="0.06" />
 
     <Button
-        android:id="@+id/returnBackButton"
+        android:id="@+id/goToGymLogPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
+        android:layout_marginTop="116dp"
+        android:gravity="center"
+        android:text="Go To Gym Log"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
+
+    <Button
+        android:id="@+id/goToAdminPage"
+        android:layout_width="223dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:text="Go To Admin Page"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToGymLogPage" />
+
+    <Button
+        android:id="@+id/returnBackButton"
+        android:layout_width="170dp"
+        android:layout_height="68dp"
         android:layout_marginBottom="116dp"
         android:gravity="center"
         android:text="Return"
