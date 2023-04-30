@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/buttons"
+        android:icon="@drawable/user_options"
+        android:title="3Buttons"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@+id/logout"
+                android:title="Log Out"/>
+            <item android:id="@+id/gymlog"
+                android:title="Gym Log"/>
+            <item android:id="@+id/welcome"
+                android:title="Welcome User"/>
+        </menu>
+
+    </item>
+</menu>

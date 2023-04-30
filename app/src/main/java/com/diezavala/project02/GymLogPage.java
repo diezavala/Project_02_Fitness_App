@@ -1,12 +1,18 @@
 package com.diezavala.project02;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -32,6 +38,36 @@ public class GymLogPage extends AppCompatActivity {
 
     List<GymLogItem> GymLogList;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater =getMenuInflater();
+        menuInflater.inflate(R.menu.user_options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.buttons:
+                Toast.makeText(this, "More User Options Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.logout:
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GymLogPage.this, LogInPage.class));
+                return true;
+            case R.id.gymlog:
+                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GymLogPage.this, GymLogPage.class));
+                return true;
+            case R.id.welcome:
+                Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GymLogPage.this, WelcomeUserActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
 
     @Override

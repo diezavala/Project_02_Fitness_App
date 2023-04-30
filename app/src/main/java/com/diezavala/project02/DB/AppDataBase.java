@@ -7,9 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.diezavala.project02.users;
-import com.diezavala.project02.DB.UserDAO;
+//import com.diezavala.project02.DB.UserDAO;
 
-@Database(entities = {users.class}, version = 1)
+@Database(entities = {users.class}, version = 2)
 public abstract class AppDataBase extends RoomDatabase {
     public static final String DATABASE_NAME = "userLogin.db";
     public static final String USER_TABLE = "userLogIn_table";
