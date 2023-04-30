@@ -43,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
         logIn = binding.logInButton;
         create = binding.createAccountButton;
         getDatabase();
-        checkForUser();
+//        checkForUser();
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkForUser();
                 startActivity(new Intent(MainActivity.this, LogInPage.class));
             }
         });
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             users adminUser = new users("admin1","admin1", 1);
             userDAO.insert(adminUser);
         }
-        Intent intent = LogInPage.intentFactory(this);
-        startActivity(intent);
+//        Intent intent = LogInPage.intentFactory(this);
+//        startActivity(intent);
     }
 }

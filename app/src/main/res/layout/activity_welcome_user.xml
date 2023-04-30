@@ -23,11 +23,12 @@
         android:id="@+id/goToGymLogPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="220dp"
         android:gravity="center"
         android:text="Go To Gym Log"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
 
@@ -37,7 +38,7 @@
         android:layout_height="88dp"
         android:layout_marginTop="72dp"
         android:gravity="center"
-        android:text="Go To Admin Page"
+        android:text="Remove User"
         android:textSize="30sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,13 +49,13 @@
         android:id="@+id/returnBackButton"
         android:layout_width="170dp"
         android:layout_height="68dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:text="Return"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 

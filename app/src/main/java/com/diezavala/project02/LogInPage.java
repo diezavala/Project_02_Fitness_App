@@ -38,7 +38,6 @@ public class LogInPage extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         logInText = binding.logInTextView;
-
         usernameText = binding.usernameEnterEditText;
         passwordText = binding.passwordEnterEditText;
         logInButton = binding.logInButton;
