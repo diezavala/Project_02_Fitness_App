@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.diezavala.project02.users;
-import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
+import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.databinding.ActivityMainBinding;
 
 import java.util.List;
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkForUser();
                 startActivity(new Intent(MainActivity.this, LogInPage.class));
             }
         });
