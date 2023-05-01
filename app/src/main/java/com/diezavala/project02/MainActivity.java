@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkForUser();//if no users and try to login make default
                 startActivity(new Intent(MainActivity.this, LogInPage.class));
             }
         });
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             users adminUser = new users("admin1","admin1", 1);
             userDAO.insert(adminUser);
         }
-        //starts login page
+
 //        Intent intent = LogInPage.intentFactory(this);
 //        startActivity(intent);
     }
