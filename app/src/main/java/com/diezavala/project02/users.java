@@ -5,32 +5,36 @@ import androidx.room.PrimaryKey;
 
 import com.diezavala.project02.DB.AppDataBase;
 
-@Entity(tableName = AppDataBase.USERLOGIN_TABLE)
+@Entity(tableName = AppDataBase.USER_TABLE)
 public class users {
     @PrimaryKey(autoGenerate = true)
     private int logId;
-    private String user_name;
-    private String user_password;
 
-    public users(String user_name, String user_password) {
-        this.user_name = user_name;
-        this.user_password = user_password;
+    private String username;
+    private String password;
+    private int isAdmin;
+
+    public users(String username, String password, int isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+//        this.logId = logId;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getLogId() {
@@ -39,5 +43,13 @@ public class users {
 
     public void setLogId(int logId) {
         this.logId = logId;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }
