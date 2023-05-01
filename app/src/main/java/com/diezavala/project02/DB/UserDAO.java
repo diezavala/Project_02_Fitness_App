@@ -1,6 +1,6 @@
 package com.diezavala.project02.DB;
 
-import com.diezavala.project02.DB.AppDataBase;
+//import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.users;
 import androidx.room.Dao;
 import androidx.room.Delete;

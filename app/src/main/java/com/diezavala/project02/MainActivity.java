@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button logIn;
     Button create;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkForUser();
                 startActivity(new Intent(MainActivity.this, LogInPage.class));
             }
         });
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // stores users into list and if it is empty it makes basic user and basic admin
         List<users> users = userDAO.getALlUsers();
         if(users.size() <= 0){
             users defaultUser = new users("diegoz","diego123", 0);
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             users adminUser = new users("admin1","admin1", 1);
             userDAO.insert(adminUser);
         }
+
 //        Intent intent = LogInPage.intentFactory(this);
 //        startActivity(intent);
     }

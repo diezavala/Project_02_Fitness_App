@@ -1,5 +1,6 @@
 package com.diezavala.project02;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -7,9 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
@@ -37,6 +42,38 @@ public class WelcomeUserActivity extends AppCompatActivity {
     Button goToAdminPage;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater =getMenuInflater();
+        menuInflater.inflate(R.menu.user_options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.buttons:
+                Toast.makeText(this, "More User Options Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.logout:
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(WelcomeUserActivity.this, LogInPage.class));
+                return true;
+            case R.id.gymlog:
+                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
+                return true;
+            case R.id.welcome:
+                Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(WelcomeUserActivity.this, WelcomeUserActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
@@ -47,13 +84,19 @@ public class WelcomeUserActivity extends AppCompatActivity {
         goToAdminPage = binding.goToAdminPage;
         welcomeUser = binding.welcomeUserTextView;
 
-//        returnButton = binding.returnBackButton;
+        returnButton = binding.returnBackButton;
 
         getDatabase();
         checkForUser();
         isAdmin();
         welcomeUser.setText("Hello " + user.getUsername());
 
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelcomeUserActivity.this, MainActivity.class));
+            }
+        });
 
         goToGymLog.setOnClickListener(new View.OnClickListener() {
             @Override
