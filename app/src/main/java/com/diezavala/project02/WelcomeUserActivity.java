@@ -26,6 +26,7 @@ import java.util.List;
 public class WelcomeUserActivity extends AppCompatActivity {
 
 //    ActivityWelcomeUserBinding binding;
+    Button workoutsButton;
     Button returnButton;
     TextView welcomeUser;
     UserDAO userDAO;
@@ -84,12 +85,21 @@ public class WelcomeUserActivity extends AppCompatActivity {
         goToAdminPage = binding.goToAdminPage;
         welcomeUser = binding.welcomeUserTextView;
 
+        workoutsButton = binding.goToWorkoutInfoPage;
         returnButton = binding.returnBackButton;
 
         getDatabase();
         checkForUser();
         isAdmin();
         welcomeUser.setText("Hello " + user.getUsername());
+
+
+        workoutsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelcomeUserActivity.this, WorkoutInfoPage.class));
+            }
+        });
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override

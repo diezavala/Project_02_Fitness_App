@@ -10,40 +10,50 @@
         android:id="@+id/welcomeUserTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Welcome"
         android:textSize="56sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToWorkoutInfoPage"
+        android:layout_width="223dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="76dp"
+        android:gravity="center"
+        android:text="Workouts"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
 
     <Button
         android:id="@+id/goToGymLogPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:text="Go To Gym Log"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/goToWorkoutInfoPage" />
 
     <Button
         android:id="@+id/goToAdminPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginBottom="56dp"
         android:gravity="center"
         android:text="Remove User"
         android:textSize="30sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/returnBackButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goToGymLogPage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/returnBackButton"
