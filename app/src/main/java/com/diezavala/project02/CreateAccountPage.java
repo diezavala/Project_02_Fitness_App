@@ -59,6 +59,15 @@ public class CreateAccountPage extends AppCompatActivity {
                 }
             }
         });
+
+        createText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+                return false;
+            }
+        });
     }
 
     private void userAlreadyExists() {

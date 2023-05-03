@@ -1,5 +1,9 @@
 package com.diezavala.project02;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,33 +17,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
-import com.diezavala.project02.GL.GymLogDAO;
+import com.diezavala.project02.FD.FoodDAO;
+import com.diezavala.project02.FD.FoodDatabase;
 import com.diezavala.project02.GL.GymLogDataBase;
+import com.diezavala.project02.databinding.ActivityFoodLogBinding;
 import com.diezavala.project02.databinding.ActivityGymLogBinding;
 
 import java.util.List;
 
-public class GymLogPage extends AppCompatActivity {
+public class FoodLog extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
-
-    ActivityGymLogBinding binding;
-
+    ActivityFoodLogBinding binding;
     TextView mainDisplay;
 
-    EditText exercise;
-    EditText weight;
-    EditText reps;
+    EditText food;
+    EditText calsPS;
+    EditText servings;
 
     Button submit;
-
-    GymLogDAO gymLogDAO;
-
-    List<GymLogItem> GymLogList;
+    FoodDAO foodDAO;
+    List<Food> FoodLogList;
     private users user;
     private int userId;
 
@@ -61,6 +59,11 @@ public class GymLogPage extends AppCompatActivity {
                 Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
                 startActivity(logOutIntent);
                 return true;
+//            case R.id.switchlog:
+//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+//                Intent gymIntent = GymLogPage.intentFactory(getApplicationContext(), userId);
+//                startActivity(gymIntent);
+//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
@@ -73,57 +76,53 @@ public class GymLogPage extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_food_log);
 
-        binding = ActivityGymLogBinding.inflate(getLayoutInflater());
+        binding = ActivityFoodLogBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mainDisplay = binding.mainGymLogDisplay;
-        exercise = binding.mainExerciseEditText;
-        weight = binding.mainWeightEditText;
-        reps = binding.mainRepsEditText;
+        mainDisplay = binding.mainFoodLogDisplay;
+        food = binding.mainFoodEditText;
+        calsPS = binding.mainCalsEditText;
+        servings = binding.mainServingsEditText;
         submit = binding.mainSubmitButton;
 
         mainDisplay.setMovementMethod(new ScrollingMovementMethod());
 
-        gymLogDAO = Room.databaseBuilder(this, GymLogDataBase.class, GymLogDataBase.GL_DATABASE_NAME)
+        foodDAO = Room.databaseBuilder(this, FoodDatabase.class, FoodDatabase.FOOD_DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build()
-                .GymLogDAO();
+                .FoodDAO();
         refreshDisplay();
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitGymLog();
+                submitFoodLog();
                 refreshDisplay();
             }
         });
     }
 
-    private void submitGymLog(){
-        String exerciseSub = exercise.getText().toString();
-        double weightSub = Double.parseDouble(weight.getText().toString());
-        int repsSub = Integer.parseInt(reps.getText().toString());
+    private void submitFoodLog() {
+        String foodName = food.getText().toString();
+        double servingSize = Double.parseDouble(servings.getText().toString());
+        int cals = Integer.parseInt(calsPS.getText().toString());
 
-        GymLogItem log = new GymLogItem(exerciseSub, repsSub, weightSub);
+        Food log = new Food(foodName, cals, servingSize);
 
-        gymLogDAO.insert(log);
-
+        foodDAO.insert(log);
     }
 
-    private void refreshDisplay(){
+    private void refreshDisplay() {
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
-        System.out.println("User Id: " + userId);
-//        GymLogList = gymLogDAO.getLogById(userId);
-        GymLogList = gymLogDAO.getGymLogs();
-        if(!GymLogList.isEmpty()){
+//        FoodLogList = foodDAO.getFoodLogById(userId);
+        FoodLogList = foodDAO.getAllFoodLogs();
+        if(!FoodLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
-            for(GymLogItem log: GymLogList){
+            for(Food log: FoodLogList){
                 sb.append(log.toString());
             }
             mainDisplay.setText(sb.toString());
@@ -133,7 +132,7 @@ public class GymLogPage extends AppCompatActivity {
     }
 
     public static Intent intentFactory(Context context, int userId){
-        Intent intent = new Intent(context, GymLogPage.class);
+        Intent intent = new Intent(context, FoodLog.class);
         intent.putExtra(USER_ID_KEY, userId);
 
         return intent;

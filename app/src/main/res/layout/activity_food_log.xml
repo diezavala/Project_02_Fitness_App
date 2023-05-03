@@ -4,24 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GymLogPage">
+    tools:context=".FoodLog">
 
     <TextView
         android:id="@+id/FitnessAppTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Gym Log"
+        android:text="Food Log"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <EditText
+        android:id="@+id/mainFoodEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Food"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/mainCalsEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/mainCalsEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Cals/Serving"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toTopOf="@+id/mainServingsEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/mainServingsEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter servings"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/mainSubmitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/mainSubmitButton"
+        android:layout_width="150dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="24dp"
+        android:text="Submit"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/mainFoodLogDisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
-        android:id="@+id/mainGymLogDisplay"
+        android:id="@+id/mainFoodLogDisplay"
         android:layout_width="372dp"
-        android:layout_height="235dp"
-        android:layout_marginBottom="52dp"
+        android:layout_height="238dp"
+        android:layout_marginBottom="56dp"
         android:fadeScrollbars="true"
         android:scrollbars="vertical"
         android:text="@string/app_name"
@@ -31,54 +83,4 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/mainWeightEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter Weight"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toTopOf="@+id/mainRepsEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/mainExerciseEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter Exercise"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/mainWeightEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/mainSubmitButton"
-        android:layout_width="150dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="32dp"
-        android:text="Submit"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/mainGymLogDisplay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/mainRepsEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter Reps"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toTopOf="@+id/mainSubmitButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
