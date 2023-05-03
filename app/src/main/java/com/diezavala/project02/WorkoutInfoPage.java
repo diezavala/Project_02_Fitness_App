@@ -25,12 +25,13 @@ public class WorkoutInfoPage extends AppCompatActivity {
     ActivityWorkoutInfoPageBinding binding;
 
     Button nextSplit;
+    Button prevSplit;
     TextView welcomeInfo;
     TextView splitName;
     TextView workoutInfo;
     List<String> splits = new ArrayList<>();
     HashMap<Integer, String> splitNames = new HashMap<>();
-    int num = 0;
+    int num = -1;
 
     String ppl =
             "Push day:\n" +
@@ -205,6 +206,7 @@ public class WorkoutInfoPage extends AppCompatActivity {
         splitName = binding.splitName;
         workoutInfo = binding.workoutInfoText;
         nextSplit = binding.nextSplitButton;
+        prevSplit = binding.previousSplitButton;
 
 //        updateDisplayText();
 
@@ -225,21 +227,48 @@ public class WorkoutInfoPage extends AppCompatActivity {
             }
         });
 
+        prevSplit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateDisplayTextBack();
+            }
+        });
+
     }
 
+    //starting at -1
     private void updateDisplayText() {
+        num++;
         if(num == 4){
-            System.out.println(num);
             Toast.makeText(WorkoutInfoPage.this, "You've seen all the splits" , Toast.LENGTH_SHORT).show();
             num = 0;
             workoutInfo.setText(splits.get(num));
-            splitName.setText(splitNames.get(num));
+            splitName.setText((num+1) + ": " + splitNames.get(num));
 
         }else{
-            System.out.println(num);
             workoutInfo.setText(splits.get(num));
-            splitName.setText(splitNames.get(num));
-            num++;
+            splitName.setText((num+1) + ": " + splitNames.get(num));
+        }
+    }
+
+    private void updateDisplayTextBack() {
+        if(num == -1){
+            workoutInfo.setText("Click The next button");
+            Toast.makeText(WorkoutInfoPage.this, "Click The Next Button First" , Toast.LENGTH_SHORT).show();
+        }else {
+            if(num != 0 && num < 4){
+                num--;
+                workoutInfo.setText(splits.get(num));
+                splitName.setText((num+1) + ": " + splitNames.get(num));
+            }else if(num == 0){
+                num = 3;
+                workoutInfo.setText(splits.get(num));
+                splitName.setText((num+1) + ": " + splitNames.get(num));
+            }else{
+                num--;
+                workoutInfo.setText(splits.get(num));
+                splitName.setText((num+1) + ": " + splitNames.get(num));
+            }
         }
     }
 

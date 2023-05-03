@@ -61,11 +61,6 @@ public class GymLogPage extends AppCompatActivity {
                 Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
                 startActivity(logOutIntent);
                 return true;
-//            case R.id.switchlog:
-//                Toast.makeText(this, "Going to FoodLog", Toast.LENGTH_SHORT).show();
-//                Intent foodIntent = FoodLog.intentFactory(getApplicationContext(), userId);
-//                startActivity(foodIntent);
-//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
