@@ -40,6 +40,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
     public users admin1 = new users("admin1", "password1", 1);
     ActivityWelcomeUserBinding binding;
     Button goToGymLog;
+    Button goToFoodLog;
     Button goToAdminPage;
 
     @Override
@@ -82,6 +83,8 @@ public class WelcomeUserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         goToGymLog = binding.goToGymLogPage;
+        goToFoodLog = binding.goToFoodLogPage;
+
         goToAdminPage = binding.goToAdminPage;
         welcomeUser = binding.welcomeUserTextView;
 
@@ -112,6 +115,13 @@ public class WelcomeUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
+            }
+        });
+
+        goToFoodLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelcomeUserActivity.this, FoodLog.class));
             }
         });
 

@@ -19,14 +19,16 @@
 
     <TextView
         android:id="@+id/mainGymLogDisplay"
-        android:layout_width="373dp"
-        android:layout_height="217dp"
-        android:layout_marginBottom="68dp"
+        android:layout_width="372dp"
+        android:layout_height="235dp"
+        android:layout_marginBottom="52dp"
         android:fadeScrollbars="true"
         android:scrollbars="vertical"
         android:text="@string/app_name"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText

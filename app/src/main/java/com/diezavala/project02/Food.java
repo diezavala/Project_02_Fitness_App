@@ -25,7 +25,8 @@ public class Food {
                 "Food: " + foodName + "\n" +
                 "Cals Per Serving: " + calsPerServing + "\n" +
                 "Serving Size: " + servings + "\n" +
-                "=-=-=-=-=-=-=\n";
+                "Total Calories: " + (calsPerServing *  servings)+
+                "\n=-=-=-=-=-=-=\n";
     }
 
     public int getFoodLogId() {

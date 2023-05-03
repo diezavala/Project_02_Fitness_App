@@ -32,14 +32,27 @@
 
     <Button
         android:id="@+id/goToGymLogPage"
-        android:layout_width="223dp"
-        android:layout_height="88dp"
+        android:layout_width="171dp"
+        android:layout_height="94dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="Go To Gym Log"
+        android:text="Gym Log"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/goToFoodLogPage"
+        app:layout_constraintHorizontal_bias="0.301"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToWorkoutInfoPage" />
+
+    <Button
+        android:id="@+id/goToFoodLogPage"
+        android:layout_width="171dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Food Log"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToWorkoutInfoPage" />
 
     <Button
