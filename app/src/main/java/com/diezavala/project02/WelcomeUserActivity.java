@@ -18,12 +18,12 @@ import android.widget.Toast;
 
 import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
-import com.diezavala.project02.databinding.ActivityMainBinding;
 import com.diezavala.project02.databinding.ActivityWelcomeUserBinding;
 
 import java.util.List;
 
 public class WelcomeUserActivity extends AppCompatActivity {
+
 
 //    ActivityWelcomeUserBinding binding;
     Button workoutsButton;
@@ -60,13 +60,22 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WelcomeUserActivity.this, LogInPage.class));
                 return true;
+
+            case R.id.gymlog:
+                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
+                startActivity(i);
+                return true;
+
 //            case R.id.switchlog:
 //                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
 //                return true;
+
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(WelcomeUserActivity.this, WelcomeUserActivity.class));
+                Intent intent = WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,6 +125,19 @@ public class WelcomeUserActivity extends AppCompatActivity {
         goToGymLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
+                startActivity(i);
+            }
+        });
+
+        goToAdminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent h = AdminHub.adminHubIntent(getApplicationContext(), user.getLogId());
+                startActivity(h);
+//                startActivity(new Intent(WelcomeUserActivity.this, AdminHub.class));
+
                 Intent intent = GymLogPage.intentFactory(getApplicationContext(), userId);
                 startActivity(intent);
             }
@@ -126,6 +148,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = FoodLog.intentFactory(getApplicationContext(), userId);
                 startActivity(intent);
+
             }
         });
 
@@ -160,8 +183,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
             userDAO.insert(user1);
             userDAO.insert(admin1);
         }
-//        Intent intent = LogInPage.intentFactory(this);
-//        startActivity(intent);
     }
 
     public static Intent intentFactory(Context context, int userId){

@@ -1,5 +1,4 @@
 package com.diezavala.project02;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -8,47 +7,43 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
-import com.diezavala.project02.databinding.ActivityAdminRemoveUserPageBinding;
 import com.diezavala.project02.databinding.ActivityAdminViewUserPageBinding;
 
 import java.util.List;
 
-public class AdminRemoveUserPage extends AppCompatActivity {
-
-    private ActivityAdminRemoveUserPageBinding binding;
+public class AdminViewUserPage extends AppCompatActivity {
+    private ActivityAdminViewUserPageBinding binding;
 
     UserDAO userDAO;
 
     List<users> usersList;
-    EditText enterUsername;
+    TextView usersDisplay;
     Button backButton;
-    Button searchButton;
-    Button removeButton;
+
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     users user;
-    private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
     private int userId = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_remove_user_page);
+        setContentView(R.layout.activity_admin_view_user_page);
 
-        binding = ActivityAdminRemoveUserPageBinding.inflate(getLayoutInflater());
+        binding = ActivityAdminViewUserPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        enterUsername= binding.searchUsers;
-        backButton = binding.removeToHub;
-        searchButton = binding.searchButton;
-        removeButton = binding.removeUserButton;
+        usersDisplay= binding.viewUserDisplay;
+        backButton = binding.viewToHubButton;
 
         userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getDAO();
+        refreshDisplay();
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
         user = userDAO.getUserByUSerId(userId);
 
@@ -59,26 +54,27 @@ public class AdminRemoveUserPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: make button find user by username from enterUsername edit text
-            }
-        });
-
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Make button deactivate selected user
-            }
-        });
-
     }
-    public static Intent adminRemoveIntent(Context context, int userId) {
-        Intent intent = new Intent(context, AdminRemoveUserPage.class);
+
+
+    private void refreshDisplay(){
+        usersList = userDAO.getALlUsers();
+        if(!usersList.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            for(users user: usersList){
+                sb.append(user.toString());
+            }
+            usersDisplay.setText(sb.toString());
+        }else{
+            usersDisplay.setText("No Users");
+        }
+    }
+
+    public static Intent adminViewIntent(Context context, int userId) {
+        Intent intent = new Intent(context, AdminViewUserPage.class);
         intent.putExtra(USER_ID_KEY, userId);
 
         return intent;
     }
+
 }

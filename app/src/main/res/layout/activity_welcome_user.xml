@@ -16,18 +16,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/goToWorkoutInfoPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
+
+        android:layout_marginTop="160dp"
         android:layout_marginTop="152dp"
+
         android:gravity="center"
         android:text="Workouts"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
 
@@ -62,12 +68,20 @@
         android:layout_height="60dp"
         android:layout_marginBottom="44dp"
         android:gravity="center"
-        android:text="Remove User"
+        android:text="Go To Admin Hub"
         android:textSize="30sp"
         android:visibility="invisible"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToGymLogPage"
+        app:layout_constraintVertical_bias="0.0" />
+
         app:layout_constraintBottom_toTopOf="@+id/returnBackButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/returnBackButton"

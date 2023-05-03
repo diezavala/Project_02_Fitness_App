@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.diezavala.project02.DB.AppDataBase;
+import com.diezavala.project02.DB.UserDAO;
 import com.diezavala.project02.GL.GymLogDAO;
 import com.diezavala.project02.GL.GymLogDataBase;
 import com.diezavala.project02.databinding.ActivityGymLogBinding;
@@ -26,6 +28,12 @@ import java.util.List;
 public class GymLogPage extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
+
+    private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
+    users user;
+    UserDAO userDAO;
+    private int userId = -1;
+
 
     ActivityGymLogBinding binding;
 
@@ -58,6 +66,18 @@ public class GymLogPage extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GymLogPage.this, LogInPage.class));
+                return true;
+            case R.id.gymlog:
+                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
+                startActivity(i);
+                return true;
+            case R.id.welcome:
+                Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
+                Intent intent = WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
+                startActivity(intent);
+
                 Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
                 startActivity(logOutIntent);
                 return true;
@@ -77,7 +97,7 @@ public class GymLogPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_gym_log);
 
         binding = ActivityGymLogBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -89,6 +109,11 @@ public class GymLogPage extends AppCompatActivity {
         submit = binding.mainSubmitButton;
 
         mainDisplay.setMovementMethod(new ScrollingMovementMethod());
+
+
+        getDatabase();
+        userId = getIntent().getIntExtra(USER_ID_KEY, -1);
+        user = userDAO.getUserByUSerId(userId);
 
         gymLogDAO = Room.databaseBuilder(this, GymLogDataBase.class, GymLogDataBase.GL_DATABASE_NAME)
                 .allowMainThreadQueries()
@@ -132,6 +157,8 @@ public class GymLogPage extends AppCompatActivity {
         }
     }
 
+    public static Intent gymLogIntent(Context context, int userId){
+
     public static Intent intentFactory(Context context, int userId){
         Intent intent = new Intent(context, GymLogPage.class);
         intent.putExtra(USER_ID_KEY, userId);
@@ -139,5 +166,10 @@ public class GymLogPage extends AppCompatActivity {
         return intent;
     }
 
+    private void getDatabase() {
+        userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
+                .allowMainThreadQueries()
+                .build().getDAO();
+    }
 
 }
