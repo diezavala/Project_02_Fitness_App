@@ -276,6 +276,6 @@ public class WorkoutInfoPage extends AppCompatActivity {
         Intent intent = new Intent(context, WorkoutInfoPage.class);
         return intent;
     }
-
+//comment
 
 }
