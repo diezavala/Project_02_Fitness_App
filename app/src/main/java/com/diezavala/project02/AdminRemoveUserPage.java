@@ -1,14 +1,19 @@
 package com.diezavala.project02;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
@@ -32,6 +37,36 @@ public class AdminRemoveUserPage extends AppCompatActivity {
     users user;
     private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
     private int userId = -1;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater =getMenuInflater();
+        menuInflater.inflate(R.menu.user_options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.buttons:
+                Toast.makeText(this, "More User Options Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.logout:
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
+                Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(logOutIntent);
+                return true;
+            case R.id.welcome:
+                Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
+                Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
+                startActivity(welcomeIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

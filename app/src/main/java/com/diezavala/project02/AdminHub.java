@@ -32,34 +32,28 @@ public class AdminHub extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
+        MenuInflater menuInflater =getMenuInflater();
         menuInflater.inflate(R.menu.user_options_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.buttons:
                 Toast.makeText(this, "More User Options Selected", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AdminHub.this, LogInPage.class));
+                Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(logOutIntent);
                 return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(AdminHub.this, GymLogPage.class));
-                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
-                startActivity(i);
-                return true;
-
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(AdminHub.this, WelcomeUserActivity.class));
-                Intent intent = WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
-                startActivity(intent);
+                Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
+                startActivity(welcomeIntent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

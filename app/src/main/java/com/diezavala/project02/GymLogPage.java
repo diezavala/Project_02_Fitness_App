@@ -29,7 +29,6 @@ public class GymLogPage extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
 
-    private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     users user;
     UserDAO userDAO;
     private int userId = -1;
@@ -48,8 +47,6 @@ public class GymLogPage extends AppCompatActivity {
     GymLogDAO gymLogDAO;
 
     List<GymLogItem> GymLogList;
-    private users user;
-    private int userId;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,18 +63,6 @@ public class GymLogPage extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GymLogPage.this, LogInPage.class));
-                return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
-                startActivity(i);
-                return true;
-            case R.id.welcome:
-                Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-                Intent intent = WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
-                startActivity(intent);
-
                 Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
                 startActivity(logOutIntent);
                 return true;
@@ -157,7 +142,7 @@ public class GymLogPage extends AppCompatActivity {
         }
     }
 
-    public static Intent gymLogIntent(Context context, int userId){
+//    public static Intent gymLogIntent(Context context, int userId){
 
     public static Intent intentFactory(Context context, int userId){
         Intent intent = new Intent(context, GymLogPage.class);

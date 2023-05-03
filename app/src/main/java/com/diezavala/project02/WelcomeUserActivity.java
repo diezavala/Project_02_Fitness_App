@@ -61,17 +61,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeUserActivity.this, LogInPage.class));
                 return true;
 
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
-                startActivity(i);
-                return true;
-
-//            case R.id.switchlog:
-//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
-//                return true;
-
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 Intent intent = WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
@@ -109,7 +98,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         workoutsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = WorkoutInfoPage.intentFactory(getApplicationContext());
+                Intent intent = WorkoutInfoPage.intentFactory(getApplicationContext(), user.getLogId());
                 startActivity(intent);
             }
         });
@@ -126,7 +115,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i =GymLogPage.gymLogIntent(getApplicationContext(), user.getLogId());
+                Intent i =GymLogPage.intentFactory(getApplicationContext(), user.getLogId());
                 startActivity(i);
             }
         });
@@ -136,10 +125,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent h = AdminHub.adminHubIntent(getApplicationContext(), user.getLogId());
                 startActivity(h);
-//                startActivity(new Intent(WelcomeUserActivity.this, AdminHub.class));
-
-                Intent intent = GymLogPage.intentFactory(getApplicationContext(), userId);
-                startActivity(intent);
             }
         });
 

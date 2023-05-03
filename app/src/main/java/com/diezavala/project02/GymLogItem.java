@@ -15,6 +15,7 @@ public class GymLogItem {
     private int reps;
     private double weight;
 
+//    int gymLogKey;
 //    private Date date;
 
     public GymLogItem(String exercise, int reps, double weight) {

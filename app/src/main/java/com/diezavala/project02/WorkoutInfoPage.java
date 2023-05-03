@@ -2,6 +2,7 @@ package com.diezavala.project02;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.diezavala.project02.DB.AppDataBase;
+import com.diezavala.project02.DB.UserDAO;
 import com.diezavala.project02.databinding.ActivityWorkoutInfoPageBinding;
 
 import java.util.ArrayList;
@@ -22,6 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WorkoutInfoPage extends AppCompatActivity {
+
+    private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
+    private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
+
+    users user;
+    UserDAO userDAO;
+    private int userId = -1;
     ActivityWorkoutInfoPageBinding binding;
 
     Button nextSplit;
@@ -31,7 +41,10 @@ public class WorkoutInfoPage extends AppCompatActivity {
     TextView workoutInfo;
     List<String> splits = new ArrayList<>();
     HashMap<Integer, String> splitNames = new HashMap<>();
+
     int num = -1;
+
+
 
     String ppl =
             "Push day:\n" +
@@ -177,16 +190,15 @@ public class WorkoutInfoPage extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(WorkoutInfoPage.this, LogInPage.class));
+                Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(logOutIntent);
                 return true;
-//            case R.id.gymlog:
-//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(WorkoutInfoPage.this, GymLogPage.class));
-//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(WorkoutInfoPage.this, WelcomeUserActivity.class));
+                Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
+                startActivity(welcomeIntent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -208,7 +220,9 @@ public class WorkoutInfoPage extends AppCompatActivity {
         nextSplit = binding.nextSplitButton;
         prevSplit = binding.previousSplitButton;
 
-//        updateDisplayText();
+        getDatabase();
+        userId = getIntent().getIntExtra(USER_ID_KEY, -1);
+        user = userDAO.getUserByUSerId(userId);
 
         workoutInfo.setMovementMethod(new ScrollingMovementMethod());
 
@@ -220,6 +234,7 @@ public class WorkoutInfoPage extends AppCompatActivity {
         splitNames.put(1, "Push, Pull, Legs Split");
         splitNames.put(2, "Upper Body Split");
         splitNames.put(3, "Upper & Lower Split");
+
         nextSplit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -272,9 +287,16 @@ public class WorkoutInfoPage extends AppCompatActivity {
         }
     }
 
-    public static Intent intentFactory(Context context){
+    public static Intent intentFactory(Context context,int userId){
         Intent intent = new Intent(context, WorkoutInfoPage.class);
+        intent.putExtra(USER_ID_KEY, userId);
         return intent;
+    }
+
+    private void getDatabase() {
+        userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
+                .allowMainThreadQueries()
+                .build().getDAO();
     }
 //comment
 
