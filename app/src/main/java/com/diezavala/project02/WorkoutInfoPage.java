@@ -3,6 +3,7 @@ package com.diezavala.project02;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -177,10 +178,10 @@ public class WorkoutInfoPage extends AppCompatActivity {
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WorkoutInfoPage.this, LogInPage.class));
                 return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(WorkoutInfoPage.this, GymLogPage.class));
-                return true;
+//            case R.id.gymlog:
+//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(WorkoutInfoPage.this, GymLogPage.class));
+//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WorkoutInfoPage.this, WelcomeUserActivity.class));
@@ -240,6 +241,11 @@ public class WorkoutInfoPage extends AppCompatActivity {
             splitName.setText(splitNames.get(num));
             num++;
         }
+    }
+
+    public static Intent intentFactory(Context context){
+        Intent intent = new Intent(context, WorkoutInfoPage.class);
+        return intent;
     }
 
 

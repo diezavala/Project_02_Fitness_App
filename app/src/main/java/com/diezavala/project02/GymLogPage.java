@@ -1,5 +1,6 @@
 package com.diezavala.project02;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -23,6 +24,8 @@ import com.diezavala.project02.databinding.ActivityGymLogBinding;
 import java.util.List;
 
 public class GymLogPage extends AppCompatActivity {
+    private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
+    private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
 
     ActivityGymLogBinding binding;
 
@@ -37,6 +40,8 @@ public class GymLogPage extends AppCompatActivity {
     GymLogDAO gymLogDAO;
 
     List<GymLogItem> GymLogList;
+    private users user;
+    private int userId;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,16 +58,20 @@ public class GymLogPage extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GymLogPage.this, LogInPage.class));
+                Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(logOutIntent);
                 return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GymLogPage.this, GymLogPage.class));
-                return true;
+//            case R.id.switchlog:
+//                Toast.makeText(this, "Going to FoodLog", Toast.LENGTH_SHORT).show();
+//                Intent foodIntent = FoodLog.intentFactory(getApplicationContext(), userId);
+//                startActivity(foodIntent);
+//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GymLogPage.this, WelcomeUserActivity.class));
+                Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
+                startActivity(welcomeIntent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -113,6 +122,9 @@ public class GymLogPage extends AppCompatActivity {
     }
 
     private void refreshDisplay(){
+        userId = getIntent().getIntExtra(USER_ID_KEY, -1);
+        System.out.println("User Id: " + userId);
+//        GymLogList = gymLogDAO.getLogById(userId);
         GymLogList = gymLogDAO.getGymLogs();
         if(!GymLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
@@ -123,6 +135,13 @@ public class GymLogPage extends AppCompatActivity {
         }else{
             mainDisplay.setText("No Logs");
         }
+    }
+
+    public static Intent intentFactory(Context context, int userId){
+        Intent intent = new Intent(context, GymLogPage.class);
+        intent.putExtra(USER_ID_KEY, userId);
+
+        return intent;
     }
 
 

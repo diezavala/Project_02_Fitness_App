@@ -28,7 +28,7 @@ public interface FoodDAO {
     List<Food> getAllFoodLogs();
 
     @Query("SELECT * FROM " + FoodDatabase.FOOD_TABLE + " WHERE foodLogId = :foodLogId ")
-    Food getFoodLogById(int foodLogId);
+    List<Food> getFoodLogById(int foodLogId);
 
     @Query("SELECT * FROM " + FoodDatabase.FOOD_TABLE + " WHERE foodName = :foodName ")
     Food getFoodLogByFood(String foodName);

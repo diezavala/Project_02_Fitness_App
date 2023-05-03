@@ -61,8 +61,9 @@ public class LogInPage extends AppCompatActivity {
         logInText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                startActivity(new Intent(LogInPage.this,MainActivity.class));
-                return true;
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+                return false;
             }
         });
     }

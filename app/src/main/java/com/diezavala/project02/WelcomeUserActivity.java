@@ -60,10 +60,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WelcomeUserActivity.this, LogInPage.class));
                 return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
-                return true;
+//            case R.id.switchlog:
+//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
+//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WelcomeUserActivity.this, WelcomeUserActivity.class));
@@ -100,28 +100,32 @@ public class WelcomeUserActivity extends AppCompatActivity {
         workoutsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WelcomeUserActivity.this, WorkoutInfoPage.class));
+                Intent intent = WorkoutInfoPage.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WelcomeUserActivity.this, MainActivity.class));
+                Intent intent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
 
         goToGymLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WelcomeUserActivity.this, GymLogPage.class));
+                Intent intent = GymLogPage.intentFactory(getApplicationContext(), userId);
+                startActivity(intent);
             }
         });
 
         goToFoodLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WelcomeUserActivity.this, FoodLog.class));
+                Intent intent = FoodLog.intentFactory(getApplicationContext(), userId);
+                startActivity(intent);
             }
         });
 

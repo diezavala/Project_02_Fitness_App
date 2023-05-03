@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -25,6 +26,8 @@ import com.diezavala.project02.databinding.ActivityGymLogBinding;
 import java.util.List;
 
 public class FoodLog extends AppCompatActivity {
+    private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
+    private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
     ActivityFoodLogBinding binding;
     TextView mainDisplay;
 
@@ -35,6 +38,8 @@ public class FoodLog extends AppCompatActivity {
     Button submit;
     FoodDAO foodDAO;
     List<Food> FoodLogList;
+    private users user;
+    private int userId;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,16 +56,20 @@ public class FoodLog extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FoodLog.this, LogInPage.class));
+                Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
+                startActivity(logOutIntent);
                 return true;
-            case R.id.gymlog:
-                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FoodLog.this, GymLogPage.class));
-                return true;
+//            case R.id.switchlog:
+//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
+//                Intent gymIntent = GymLogPage.intentFactory(getApplicationContext(), userId);
+//                startActivity(gymIntent);
+//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FoodLog.this, WelcomeUserActivity.class));
+                Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
+                startActivity(welcomeIntent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -87,7 +96,6 @@ public class FoodLog extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build()
                 .FoodDAO();
-        
         refreshDisplay();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +117,8 @@ public class FoodLog extends AppCompatActivity {
     }
 
     private void refreshDisplay() {
+        userId = getIntent().getIntExtra(USER_ID_KEY, -1);
+//        FoodLogList = foodDAO.getFoodLogById(userId);
         FoodLogList = foodDAO.getAllFoodLogs();
         if(!FoodLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
@@ -120,4 +130,13 @@ public class FoodLog extends AppCompatActivity {
             mainDisplay.setText("No Logs");
         }
     }
+
+    public static Intent intentFactory(Context context, int userId){
+        Intent intent = new Intent(context, FoodLog.class);
+        intent.putExtra(USER_ID_KEY, userId);
+
+        return intent;
+    }
+
+
 }
