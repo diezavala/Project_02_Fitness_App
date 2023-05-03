@@ -10,47 +10,84 @@
         android:id="@+id/welcomeUserTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Welcome"
         android:textSize="56sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
-        android:id="@+id/goToGymLogPage"
+        android:id="@+id/goToWorkoutInfoPage"
         android:layout_width="223dp"
         android:layout_height="88dp"
+
         android:layout_marginTop="160dp"
+        android:layout_marginTop="152dp"
+
         android:gravity="center"
-        android:text="Go To Gym Log"
+        android:text="Workouts"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeUserTextView" />
 
     <Button
+        android:id="@+id/goToGymLogPage"
+        android:layout_width="141dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Gym Log"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@+id/goToFoodLogPage"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToWorkoutInfoPage" />
+
+    <Button
+        android:id="@+id/goToFoodLogPage"
+        android:layout_width="141dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:text="Food Log"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToWorkoutInfoPage" />
+
+    <Button
         android:id="@+id/goToAdminPage"
-        android:layout_width="223dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="205dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="44dp"
         android:gravity="center"
         android:text="Go To Admin Hub"
         android:textSize="30sp"
         android:visibility="invisible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToGymLogPage"
         app:layout_constraintVertical_bias="0.0" />
 
+        app:layout_constraintBottom_toTopOf="@+id/returnBackButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <Button
         android:id="@+id/returnBackButton"
         android:layout_width="170dp"
         android:layout_height="68dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="28dp"
         android:gravity="center"
         android:text="Return"
         android:textSize="30sp"

@@ -9,8 +9,8 @@
         <menu>
             <item android:id="@+id/logout"
                 android:title="Log Out"/>
-            <item android:id="@+id/gymlog"
-                android:title="Gym Log"/>
+<!--            <item android:id="@+id/switchlog"-->
+<!--                android:title="Switch Log"/>-->
             <item android:id="@+id/welcome"
                 android:title="Welcome User"/>
         </menu>
