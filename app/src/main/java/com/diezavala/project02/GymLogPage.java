@@ -120,7 +120,7 @@ public class GymLogPage extends AppCompatActivity {
         double weightSub = Double.parseDouble(weight.getText().toString());
         int repsSub = Integer.parseInt(reps.getText().toString());
 
-        GymLogItem log = new GymLogItem(exerciseSub, repsSub, weightSub);
+        GymLogItem log = new GymLogItem(exerciseSub, repsSub, weightSub, userId);
 
         gymLogDAO.insert(log);
 
@@ -129,8 +129,8 @@ public class GymLogPage extends AppCompatActivity {
     private void refreshDisplay(){
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
         System.out.println("User Id: " + userId);
-//        GymLogList = gymLogDAO.getLogById(userId);
-        GymLogList = gymLogDAO.getGymLogs();
+        GymLogList = gymLogDAO.getLogByUserId(userId);
+//        GymLogList = gymLogDAO.getGymLogs();
         if(!GymLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
             for(GymLogItem log: GymLogList){

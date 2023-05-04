@@ -30,6 +30,9 @@ public interface FoodDAO {
     @Query("SELECT * FROM " + FoodDatabase.FOOD_TABLE + " WHERE foodLogId = :foodLogId ")
     List<Food> getFoodLogById(int foodLogId);
 
+    @Query("SELECT * FROM " + FoodDatabase.FOOD_TABLE + " WHERE userLogKey = :foodLogId ")
+    List<Food> getFoodLogByUserId(int foodLogId);
+
     @Query("SELECT * FROM " + FoodDatabase.FOOD_TABLE + " WHERE foodName = :foodName ")
     Food getFoodLogByFood(String foodName);
 

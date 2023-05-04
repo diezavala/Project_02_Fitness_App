@@ -12,21 +12,30 @@ public class Food {
     private String foodName;
     private int calsPerServing;
     private double servings;
+    private int userLogKey;
 
-    public Food(String foodName, int calsPerServing, double servings) {
+    public Food(String foodName, int calsPerServing, double servings, int userLogKey) {
         this.foodName = foodName;
         this.calsPerServing = calsPerServing;
         this.servings = servings;
+        this.userLogKey = userLogKey;
     }
 
     @Override
     public String toString() {
-        return "Log #" + foodLogId + "\n" +
-                "Food: " + foodName + "\n" +
+        return "Food: " + foodName + "\n" +
                 "Cals Per Serving: " + calsPerServing + "\n" +
                 "Serving Size: " + servings + "\n" +
                 "Total Calories: " + (calsPerServing *  servings)+
                 "\n=-=-=-=-=-=-=\n";
+    }
+
+    public int getUserLogKey() {
+        return userLogKey;
+    }
+
+    public void setUserLogKey(int userLogKey) {
+        this.userLogKey = userLogKey;
     }
 
     public int getFoodLogId() {

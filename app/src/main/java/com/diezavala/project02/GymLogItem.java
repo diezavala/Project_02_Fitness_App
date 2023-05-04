@@ -15,23 +15,31 @@ public class GymLogItem {
     private int reps;
     private double weight;
 
-//    int gymLogKey;
+    private int userLogKey;
 //    private Date date;
 
-    public GymLogItem(String exercise, int reps, double weight) {
+    public GymLogItem(String exercise, int reps, double weight, int userLogKey) {
         this.exercise = exercise;
         this.reps = reps;
         this.weight = weight;
+        this.userLogKey = userLogKey;
 //        date = new Date();
     }
 
     @Override
     public String toString() {
-        return "Log #" + gymLogId + "\n" +
-                "Exercise: " + exercise + "\n" +
+        return "Exercise: " + exercise + "\n" +
                 "Weight: " + weight + "\n" +
                 "Reps: " + reps + "\n" +
                 "=-=-=-=-=-=-=\n";
+    }
+
+    public int getUserLogKey() {
+        return userLogKey;
+    }
+
+    public void setUserLogKey(int userLogKey) {
+        this.userLogKey = userLogKey;
     }
 
     public int getGymLogId() {

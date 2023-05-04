@@ -106,15 +106,15 @@ public class FoodLog extends AppCompatActivity {
         double servingSize = Double.parseDouble(servings.getText().toString());
         int cals = Integer.parseInt(calsPS.getText().toString());
 
-        Food log = new Food(foodName, cals, servingSize);
+        Food log = new Food(foodName, cals, servingSize, userId);
 
         foodDAO.insert(log);
     }
 
     private void refreshDisplay() {
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
-//        FoodLogList = foodDAO.getFoodLogById(userId);
-        FoodLogList = foodDAO.getAllFoodLogs();
+        FoodLogList = foodDAO.getFoodLogByUserId(userId);
+//        FoodLogList = foodDAO.getAllFoodLogs();
         if(!FoodLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
             for(Food log: FoodLogList){

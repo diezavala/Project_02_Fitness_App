@@ -27,4 +27,7 @@ public interface GymLogDAO {
     @Query("SELECT * FROM " + GymLogDataBase.GYMLOG_TABLE + " WHERE gymLogId = :gymLogId ")
     List<GymLogItem> getLogById(int gymLogId);
 
+    @Query("SELECT * FROM " + GymLogDataBase.GYMLOG_TABLE + " WHERE userLogKey = :userLogId ")
+    List<GymLogItem> getLogByUserId(int userLogId);
+
 }
