@@ -59,11 +59,6 @@ public class FoodLog extends AppCompatActivity {
                 Intent logOutIntent = LogInPage.intentFactory(getApplicationContext());
                 startActivity(logOutIntent);
                 return true;
-//            case R.id.switchlog:
-//                Toast.makeText(this, "Going to GymLog", Toast.LENGTH_SHORT).show();
-//                Intent gymIntent = GymLogPage.intentFactory(getApplicationContext(), userId);
-//                startActivity(gymIntent);
-//                return true;
             case R.id.welcome:
                 Toast.makeText(this, "Going to Welcome Page", Toast.LENGTH_SHORT).show();
                 Intent welcomeIntent = WelcomeUserActivity.intentFactory(getApplicationContext(), userId);
@@ -111,15 +106,15 @@ public class FoodLog extends AppCompatActivity {
         double servingSize = Double.parseDouble(servings.getText().toString());
         int cals = Integer.parseInt(calsPS.getText().toString());
 
-        Food log = new Food(foodName, cals, servingSize);
+        Food log = new Food(foodName, cals, servingSize, userId);
 
         foodDAO.insert(log);
     }
 
     private void refreshDisplay() {
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
-//        FoodLogList = foodDAO.getFoodLogById(userId);
-        FoodLogList = foodDAO.getAllFoodLogs();
+        FoodLogList = foodDAO.getFoodLogByUserId(userId);
+//        FoodLogList = foodDAO.getAllFoodLogs();
         if(!FoodLogList.isEmpty()){
             StringBuilder sb = new StringBuilder();
             for(Food log: FoodLogList){

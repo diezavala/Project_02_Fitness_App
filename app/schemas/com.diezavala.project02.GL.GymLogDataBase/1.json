@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d972cc46a2b20d9f7c66a570b34209aa",
+    "identityHash": "e8196dc62fc6f1dbd9c7f6b1cf8e0929",
     "entities": [
       {
         "tableName": "gymlog_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gymLogId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `exercise` TEXT, `reps` INTEGER NOT NULL, `weight` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gymLogId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `exercise` TEXT, `reps` INTEGER NOT NULL, `weight` REAL NOT NULL, `userLogKey` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "gymLogId",
@@ -31,6 +31,12 @@
             "columnName": "weight",
             "affinity": "REAL",
             "notNull": true
+          },
+          {
+            "fieldPath": "userLogKey",
+            "columnName": "userLogKey",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -46,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd972cc46a2b20d9f7c66a570b34209aa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e8196dc62fc6f1dbd9c7f6b1cf8e0929')"
     ]
   }
 }

@@ -1,5 +1,4 @@
 package com.diezavala.project02;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -12,34 +11,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diezavala.project02.DB.AppDataBase;
 import com.diezavala.project02.DB.UserDAO;
-import com.diezavala.project02.databinding.ActivityAdminRemoveUserPageBinding;
-import com.diezavala.project02.databinding.ActivityAdminViewUserPageBinding;
+import com.diezavala.project02.databinding.ActivityAdminHubBinding;
 
-import java.util.List;
 
-public class AdminRemoveUserPage extends AppCompatActivity {
-
-    private ActivityAdminRemoveUserPageBinding binding;
-
-    UserDAO userDAO;
-
-    List<users> usersList;
-    EditText enterUsername;
-    TextView userDisplay;
+public class AdminHub extends AppCompatActivity {
+    Button viewUserButton;
+    Button removeUserButton;
     Button backButton;
-    Button searchButton;
-    Button removeButton;
+    ActivityAdminHubBinding binding;
+
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     users user;
-    users selectedUser;
-    private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
+    UserDAO userDAO;
     private int userId = -1;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,61 +63,53 @@ public class AdminRemoveUserPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_remove_user_page);
-
-        binding = ActivityAdminRemoveUserPageBinding.inflate(getLayoutInflater());
+        setContentView(R.layout.activity_admin_hub);
+        binding = ActivityAdminHubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        enterUsername= binding.searchUsers;
-        backButton = binding.removeToHub;
-        searchButton = binding.searchButton;
-        removeButton = binding.removeUserButton;
-        userDisplay = binding.selectedUserDisplay;
 
-        userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
-                .allowMainThreadQueries()
-                .build()
-                .getDAO();
+        viewUserButton = binding.viewUserButton;
+        removeUserButton = binding.removeUserButton;
+        backButton = binding.backToWelcome;
+
+        getDatabase();
         userId = getIntent().getIntExtra(USER_ID_KEY, -1);
         user = userDAO.getUserByUSerId(userId);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        viewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = AdminHub.adminHubIntent(getApplicationContext(), user.getLogId());
+                Intent i =AdminViewUserPage.adminViewIntent(getApplicationContext(), user.getLogId());
                 startActivity(i);
             }
         });
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        removeUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = enterUsername.getText().toString();
-                selectedUser = userDAO.getUserByUsername(username);
-                if(selectedUser != null){
-                    userDisplay.setText(selectedUser.toString());
-                } else{
-                    userDisplay.setText("No User: "+enterUsername.getText().toString());
-                }
+                Intent i =AdminRemoveUserPage.adminRemoveIntent(getApplicationContext(), user.getLogId());
+                startActivity(i);
             }
         });
 
-        removeButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedUser == null){
-                    userDisplay.setText("Please Select Valid User");
-                } else{
-                    userDAO.delete(selectedUser);
-                    userDisplay.setText("User Deleted");
-                }
+                Intent i =WelcomeUserActivity.intentFactory(getApplicationContext(), user.getLogId());
+                startActivity(i);
             }
         });
-
     }
-    public static Intent adminRemoveIntent(Context context, int userId) {
-        Intent intent = new Intent(context, AdminRemoveUserPage.class);
+
+    public static Intent adminHubIntent(Context context, int userId) {
+        Intent intent = new Intent(context, AdminHub.class);
         intent.putExtra(USER_ID_KEY, userId);
 
         return intent;
+    }
+
+    private void getDatabase() {
+        userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
+                .allowMainThreadQueries()
+                .build().getDAO();
     }
 }
