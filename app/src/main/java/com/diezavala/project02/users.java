@@ -21,6 +21,15 @@ public class users {
 //        this.logId = logId;
     }
 
+    @Override
+    public String toString() {
+        if(isAdmin==1){
+            return "Username: "+username+" is an Admin.\n";
+        } else{
+            return "Username: "+username+" is not an Admin.\n";
+        }
+    }
+
     public String getUsername() {
         return username;
     }

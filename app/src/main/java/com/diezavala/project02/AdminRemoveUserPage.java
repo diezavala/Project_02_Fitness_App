@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diezavala.project02.DB.AppDataBase;
@@ -30,11 +31,13 @@ public class AdminRemoveUserPage extends AppCompatActivity {
 
     List<users> usersList;
     EditText enterUsername;
+    TextView userDisplay;
     Button backButton;
     Button searchButton;
     Button removeButton;
     private static final String USER_ID_KEY = "com.diezavala.project02.userIdKey";
     users user;
+    users selectedUser;
     private static final String PREFERENCES_KEY = "com.diezavala.project02.PREFERENCES_KEY";
     private int userId = -1;
 
@@ -79,6 +82,7 @@ public class AdminRemoveUserPage extends AppCompatActivity {
         backButton = binding.removeToHub;
         searchButton = binding.searchButton;
         removeButton = binding.removeUserButton;
+        userDisplay = binding.selectedUserDisplay;
 
         userDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
                 .allowMainThreadQueries()
@@ -98,14 +102,25 @@ public class AdminRemoveUserPage extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: make button find user by username from enterUsername edit text
+                String username = enterUsername.getText().toString();
+                selectedUser = userDAO.getUserByUsername(username);
+                if(selectedUser != null){
+                    userDisplay.setText(selectedUser.toString());
+                } else{
+                    userDisplay.setText("No User: "+enterUsername.getText().toString());
+                }
             }
         });
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Make button deactivate selected user
+                if(selectedUser == null){
+                    userDisplay.setText("Please Select Valid User");
+                } else{
+                    userDAO.delete(selectedUser);
+                    userDisplay.setText("User Deleted");
+                }
             }
         });
 
