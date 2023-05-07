@@ -37,9 +37,12 @@ public class FoodLog extends AppCompatActivity {
 
     Button submit;
     FoodDAO foodDAO;
+
     List<Food> FoodLogList;
     private users user;
     private int userId;
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,13 +105,17 @@ public class FoodLog extends AppCompatActivity {
     }
 
     private void submitFoodLog() {
-        String foodName = food.getText().toString();
-        double servingSize = Double.parseDouble(servings.getText().toString());
-        int cals = Integer.parseInt(calsPS.getText().toString());
+        if(food.getText().toString().equals("") || servings.getText().toString().equals("") || calsPS.getText().toString().equals("")){
+            Toast.makeText(this, "Cannot be empty", Toast.LENGTH_SHORT).show();
+        }else{
+            String foodName = food.getText().toString();
+            double servingSize = Double.parseDouble(servings.getText().toString());
+            int cals = Integer.parseInt(calsPS.getText().toString());
 
-        Food log = new Food(foodName, cals, servingSize, userId);
+            Food log = new Food(foodName, cals, servingSize, userId);
 
-        foodDAO.insert(log);
+            foodDAO.insert(log);
+        }
     }
 
     private void refreshDisplay() {

@@ -116,13 +116,20 @@ public class GymLogPage extends AppCompatActivity {
     }
 
     private void submitGymLog(){
-        String exerciseSub = exercise.getText().toString();
-        double weightSub = Double.parseDouble(weight.getText().toString());
-        int repsSub = Integer.parseInt(reps.getText().toString());
+//        String exerciseSub = exercise.getText().toString();
+//        double weightSub = Double.parseDouble(weight.getText().toString());
+//        int repsSub = Integer.parseInt(reps.getText().toString());
 
-        GymLogItem log = new GymLogItem(exerciseSub, repsSub, weightSub, userId);
+        if(exercise.getText().toString().equals("") || weight.getText().toString().equals("") || reps.getText().toString().equals("")){
+            Toast.makeText(this, "Cannot be empty", Toast.LENGTH_SHORT).show();
+        }else{
+            String exerciseSub = exercise.getText().toString();
+            double weightSub = Double.parseDouble(weight.getText().toString());
+            int repsSub = Integer.parseInt(reps.getText().toString());
+            GymLogItem log = new GymLogItem(exerciseSub, repsSub, weightSub, userId);
 
-        gymLogDAO.insert(log);
+            gymLogDAO.insert(log);
+        }
 
     }
 

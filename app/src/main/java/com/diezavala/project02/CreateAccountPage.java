@@ -76,14 +76,18 @@ public class CreateAccountPage extends AppCompatActivity {
     }
 
     private void addUserToDatabase(){
-        if(adminCodeInt.equals("123") || adminCodeInt.equals("9911")){
-            user = new users(usernameString, passwordString, 1);
-            userDAO.insert(user);
-            Toast.makeText(this, "Admin" + usernameString + " added", Toast.LENGTH_SHORT).show();
+        if(usernameString.equals("") || passwordString.equals("")){
+            Toast.makeText(this, "Cannot be empty", Toast.LENGTH_SHORT).show();
         }else{
-            user = new users(usernameString, passwordString, 0);
-            userDAO.insert(user);
-            Toast.makeText(this, "User " + usernameString + " added", Toast.LENGTH_SHORT).show();
+            if(adminCodeInt.equals("123") || adminCodeInt.equals("9911")){
+                user = new users(usernameString, passwordString, 1);
+                userDAO.insert(user);
+                Toast.makeText(this, "Admin" + usernameString + " added", Toast.LENGTH_SHORT).show();
+            }else{
+                user = new users(usernameString, passwordString, 0);
+                userDAO.insert(user);
+                Toast.makeText(this, "User " + usernameString + " added", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     private void getValuesFromDisplay(){

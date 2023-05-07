@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".FoodLog">
 
+
     <TextView
         android:id="@+id/FitnessAppTextView"
         android:layout_width="wrap_content"
@@ -13,9 +14,11 @@
         android:layout_marginTop="16dp"
         android:text="Food Log"
         android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/mainFoodEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <EditText
@@ -61,7 +64,7 @@
         android:id="@+id/mainSubmitButton"
         android:layout_width="150dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="56dp"
         android:text="Submit"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/mainFoodLogDisplay"
@@ -73,7 +76,7 @@
         android:id="@+id/mainFoodLogDisplay"
         android:layout_width="372dp"
         android:layout_height="238dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="40dp"
         android:fadeScrollbars="true"
         android:scrollbars="vertical"
         android:text="@string/app_name"
